@@ -1,0 +1,16 @@
+.form {
+  position: relative;
+}
+
+.input {
+  border: none;
+  background-color: #E8E8E8;
+  padding: 15px 30px;
+  border-radius: 5px;
+}
+
+.icon {
+  position: absolute;
+  left: 5px;
+  top: 10px
+}

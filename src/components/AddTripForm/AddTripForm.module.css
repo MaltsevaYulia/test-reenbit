@@ -1,0 +1,65 @@
+.lable {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  color: #111;
+
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+    line-height: 27px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.input {
+  outline: none;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+  padding: 9.5px 16px;
+  width: 310px;
+  font-weight: 400;
+
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.04em;
+  color: #888888;
+}
+
+.error {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #f43f5e;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+.cancel {
+  composes: btn;
+  background-color: #ffffff;
+  color: #888888;
+}
+
+.save {
+  composes: btn;
+  background-color: #54adff;
+  color: #ffffff;
+}
