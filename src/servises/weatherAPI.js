@@ -38,8 +38,7 @@ export async function fetchTodayWeather(city) {
         contentType: 'json',
       },
     });
-    console.log('🚀 ~ fetchFromToWeather ~ response:', response);
-    //   return response.data._embedded.events;
+      return response.data;
   } catch (error) {
     console.log('🚀 ~ fetchFromToWeather ~ error:', error);
   }

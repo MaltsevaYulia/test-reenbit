@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ErrorMessage, Form, Formik, Field } from 'formik';
 import css from './AddTripForm.module.css';
+import { useEffect } from 'react';
+import { fetchCities } from 'servises/citiesAPI';
+import { useDispatch } from 'react-redux';
+import { addTrip } from 'redux/operations';
+import { nanoid } from 'nanoid';
+import { fetchCityImage } from 'servises/fetchCityImage';
 
 const initialValues = {
   city: '',
@@ -9,10 +15,26 @@ const initialValues = {
 };
 
 const AddTripForm = ({ togleModalOpen }) => {
-    const handleSubmit = values => {
-        console.log("🚀 ~ handleSubmit ~ values:", values)
-        
-    };
+  const [cityOptions, setCityOptions] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchCityOptions() {
+      const cities = await fetchCities();
+      setCityOptions(cities);
+    }
+    fetchCityOptions();
+  }, []);
+
+  const handleSubmit = async values => {
+    const id = nanoid();
+    console.log('🚀 ~ handleSubmit ~ values:', values);
+    // const selectedCity = cityOptions.find(({ city }) => city === values.city);
+  const imgUrl= await fetchCityImage(values.city);
+    console.log("🚀 ~ handleSubmit ~ imgUrl:", imgUrl)
+    dispatch(addTrip({ ...values, id, url: imgUrl }));
+    togleModalOpen(false);
+  };
 
   return (
     <div>
@@ -24,15 +46,24 @@ const AddTripForm = ({ togleModalOpen }) => {
       >
         {({ values }) => (
           <Form className={css.form}>
-            {/* <label className={css.lable} htmlFor="name">
-            Pet’s name
-          </label>
-          <TextField
-            placeholder="Type name pet"
-            name="name"
-            id="name"
-            type="text"
-          /> */}
+            <label className={css.label} htmlFor="city">
+              City
+            </label>
+            <Field
+              as="select"
+              className={css.input}
+              name="city"
+              component="select"
+              // placeholder="Select a city"
+            >
+              <option  value="">Select a city</option>
+              {cityOptions.map((city, index) => (
+                <option key={index} value={city.city}>
+                  {city.city}
+                </option>
+              ))}
+            </Field>
+            <ErrorMessage className={css.error} name="city" component="div" />
 
             <label className={css.lable} htmlFor="date">
               Start date
@@ -50,7 +81,7 @@ const AddTripForm = ({ togleModalOpen }) => {
             </label>
             <Field
               className={css.input}
-              name="date"
+              name="end"
               type="date"
               placeholder="Select date"
             />
@@ -63,15 +94,9 @@ const AddTripForm = ({ togleModalOpen }) => {
               >
                 Cancel
               </button>
-              <button className={css.save} type="submit">
+              <button className={css.save} type="submit" >
                 Save
               </button>
-              {/* <PawPrintBtn title="Next" type="submit" />
-            <ArrowLeftBtn
-              title="Back"
-              type="button"
-              handleBackClick={() => prev(values)}
-            /> */}
             </div>
           </Form>
         )}

@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  width: 500px;
+  height: 100vh;
+  background-image: url(../../assets/img/bg.png);
+}
+
+.text {
+    position: relative;
+  color: #fff;
+}
+
+.icon {
+    position: absolute;
+}
