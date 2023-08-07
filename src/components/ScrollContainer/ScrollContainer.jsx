@@ -32,7 +32,7 @@ const ScrollContainer = ({  children }) => {
       current?.removeEventListener('scroll', debounceCheckForScrollPosition);
       debounceCheckForScrollPosition.cancel();
     };
-  }, []);
+  }, [debounceCheckForScrollPosition]);
 
   return (
     <div className="wrapper">
