@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { ErrorMessage, Form, Formik, Field } from 'formik';
-import css from './AddTripForm.module.css';
 import { useEffect } from 'react';
-import { fetchCities } from 'servises/citiesAPI';
 import { useDispatch } from 'react-redux';
-import { addTrip } from 'redux/operations';
+import { ErrorMessage, Form, Formik, Field } from 'formik';
 import { nanoid } from 'nanoid';
+
+import { fetchCities } from 'servises/citiesAPI';
+import { addTrip } from 'redux/operations';
 import { fetchCityImage } from 'servises/fetchCityImage';
+import { addTripValidationSchema } from 'schemas/addTripValidationSchema';
+import css from './AddTripForm.module.css';
 
 const initialValues = {
   city: '',
@@ -26,66 +28,78 @@ const AddTripForm = ({ togleModalOpen }) => {
     fetchCityOptions();
   }, []);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     const id = nanoid();
-    console.log('🚀 ~ handleSubmit ~ values:', values);
-    // const selectedCity = cityOptions.find(({ city }) => city === values.city);
-  const imgUrl= await fetchCityImage(values.city);
-    console.log("🚀 ~ handleSubmit ~ imgUrl:", imgUrl)
+        const imgUrl = await fetchCityImage(values.city);
+
     dispatch(addTrip({ ...values, id, url: imgUrl }));
     togleModalOpen(false);
   };
 
+  const currentDate = new Date();
+  const maxEndDate = new Date();
+  maxEndDate.setDate(currentDate.getDate() + 15);
+
   return (
-    <div>
-      <h2>Create Trip</h2>
+    <div className={css.container}>
+      <h3 className={css.title}>Create Trip</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        //   validationSchema={stepTwoValidationSchema}
+        validationSchema={addTripValidationSchema}
       >
-        {({ values }) => (
-          <Form className={css.form}>
-            <label className={css.label} htmlFor="city">
-              City
-            </label>
-            <Field
-              as="select"
-              className={css.input}
-              name="city"
-              component="select"
-              // placeholder="Select a city"
-            >
-              <option  value="">Select a city</option>
-              {cityOptions.map((city, index) => (
-                <option key={index} value={city.city}>
-                  {city.city}
-                </option>
-              ))}
-            </Field>
-            <ErrorMessage className={css.error} name="city" component="div" />
+        {() => (
+          <Form>
+            <div className={css.form}>
+              <label className={css.lable} htmlFor="city">
+                City
+              </label>
+              <Field
+                as="select"
+                className={css.input}
+                name="city"
+                component="select"
+              >
+                <option value="">Select a city</option>
+                {cityOptions.map((city, index) => (
+                  <option key={index} value={city.city}>
+                    {city.city}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage className={css.error} name="city" component="div" />
 
-            <label className={css.lable} htmlFor="date">
-              Start date
-            </label>
-            <Field
-              className={css.input}
-              name="start"
-              type="date"
-              placeholder="Select date"
-            />
-            <ErrorMessage className={css.error} name="date" component="div" />
+              <label className={css.lable} htmlFor="start">
+                Start date
+              </label>
+              <Field
+                className={css.input}
+                name="start"
+                type="date"
+                placeholder="Select date"
+                min={currentDate.toISOString().split('T')[0]}
+                max={maxEndDate.toISOString().split('T')[0]}
+                
+              />
+              <ErrorMessage
+                className={css.error}
+                name="start"
+                component="div"
+              />
 
-            <label className={css.lable} htmlFor="date">
-              End date
-            </label>
-            <Field
-              className={css.input}
-              name="end"
-              type="date"
-              placeholder="Select date"
-            />
-            <ErrorMessage className={css.error} name="date" component="div" />
+              <label className={css.lable} htmlFor="end">
+                End date
+              </label>
+              <Field
+                className={css.input}
+                name="end"
+                type="date"
+                placeholder="Select date"
+                min={currentDate.toISOString().split('T')[0]}
+                max={maxEndDate.toISOString().split('T')[0]}
+              />
+              <ErrorMessage className={css.error} name="end" component="div" />
+            </div>
             <div className={css.btnWrapper}>
               <button
                 className={css.cancel}
@@ -94,7 +108,7 @@ const AddTripForm = ({ togleModalOpen }) => {
               >
                 Cancel
               </button>
-              <button className={css.save} type="submit" >
+              <button className={css.save} type="submit">
                 Save
               </button>
             </div>

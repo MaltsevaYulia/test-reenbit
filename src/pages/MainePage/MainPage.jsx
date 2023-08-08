@@ -1,30 +1,35 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchTrips } from 'redux/operations';
+
 import AddTripForm from 'components/AddTripForm/AddTripForm';
 import { AddTripFormBtn } from 'components/Buttons/AddTripFormBtn';
 import Modal from 'components/Modal/Modal';
 import ScrollContainer from 'components/ScrollContainer/ScrollContainer';
 import Search from 'components/Search/Search';
 import TodayWeather from 'components/TodayWeather/TodayWeather';
-import TripItem from 'components/TripItem.jsx/TripItem';
+import TripList from 'components/TripList/TripList';
+import WeekWeather from 'components/WeekWeather/WeekWeather';
 import { daysOfWeek } from 'constants/dayOfWeek';
 
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTrips } from 'redux/operations';
-import { getTrips } from 'redux/selectors';
+
 import { fetchFromToWeather, fetchTodayWeather } from 'servises/weatherAPI';
 import css from './MainPage.module.css';
 
 const MainPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [dayOfWeek, setDayOfWeek] = useState('');
   const [city, setCity] = useState('');
   const [temp, setTemp] = useState('');
   const [start, setStart] = useState('');
-  
+  const [end, setEnd] = useState('');
+  const [icon, setIcon] = useState('');
+
+  const [weather, setWeather] = useState([]);
 
   const [isTripSelected, setIsTripSelected] = useState(false);
 
-  const trips = useSelector(getTrips);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,37 +37,42 @@ const MainPage = () => {
   }, [dispatch]);
 
   const searhWeather = async ({ city, start, end }) => {
-    // fetchFromToWeather(city, start, end);
     const todayWeather = await fetchTodayWeather(city);
     const { days } = todayWeather;
-    console.log('🚀 ~ searhWeather ~ days:', days);
+
     const date = new Date(days[0].datetime);
     const dayOfWeek = daysOfWeek[date.getDay()];
     const temp = days[0].temp;
+    const icon = days[0].icon;
+   
     setDayOfWeek(dayOfWeek);
     setCity(city);
     setTemp(temp);
     setStart(start);
+    setEnd(end);
     setIsTripSelected(true);
-    console.log('🚀 ~ searhWeather ~ dayOfWeek:', dayOfWeek);
-    console.log('🚀 ~ searhWeather ~ todayWeather:', todayWeather);
+    setIcon(icon);
+
+    const fromToWeather = await fetchFromToWeather(city, start, end);
+    setWeather(fromToWeather);
+    console.log('🚀 ~ searhWeather ~ fromToWeather:', fromToWeather);
   };
 
   return (
     <main className={css.main}>
-      <div>
-        <h1>
-          Weather <span>Forecast</span>
+      <div className={css.container}>
+        <h1 className={css.title}>
+          Weather <span className={css.titlespan}>Forecast</span>
         </h1>
         <Search />
         <div className={css.wrapper}>
           <ScrollContainer>
-            {trips.map(trip => (
-              <TripItem key={trip.id} data={trip} searhWeather={searhWeather} />
-            ))}
+            <TripList searhWeather={searhWeather} />
+            
           </ScrollContainer>
           <AddTripFormBtn togleModalOpen={setIsModalOpen} />
         </div>
+        {isTripSelected && <WeekWeather data={weather} />}
       </div>
       {isTripSelected && (
         <TodayWeather
@@ -70,8 +80,10 @@ const MainPage = () => {
           city={city}
           temp={temp}
           start={start}
+          icon={icon}
         />
       )}
+
       {isModalOpen && (
         <Modal modalOpen={setIsModalOpen}>
           <AddTripForm togleModalOpen={setIsModalOpen} />

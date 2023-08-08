@@ -1,14 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AiOutlineSearch } from 'react-icons/ai';
+
+import {filterTrips} from "redux/filterSlice"
+import { getFilterValue } from 'redux/selectors';
 import css from "./Search.module.css"
 
 const Search=()=> {
-  const [query, setquery] = useState('');
+ 
+  const filterValue = useSelector(getFilterValue);
+  const dispatch=useDispatch()
 
   const handleChange = e => {
     const { value } = e.target;
-    setquery(value);
+    dispatch(filterTrips(value));
   };
 
   return (
@@ -16,7 +21,7 @@ const Search=()=> {
       <input
         className={css.input}
         name="query"
-        value={query}
+        value={filterValue}
         placeholder="Search your trip"
         onChange={handleChange}
       />

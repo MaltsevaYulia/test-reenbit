@@ -22,7 +22,7 @@ export const tripsSlice = createSlice({
       .addCase(addTrip.fulfilled, (state, action) => {
         state.items.push(action.payload);
         state.isLoading = false;
-        notifySuccess(`Trip ${action.payload.name} added successfully`);
+        notifySuccess('Trip added successfully');
       })
       .addCase(deleteTrip.fulfilled, (state, action) => {
         const index = state.items.findIndex(
@@ -30,7 +30,7 @@ export const tripsSlice = createSlice({
         );
         state.items.splice(index, 1);
         state.isLoading = false;
-        notifySuccess(`Trip ${action.payload.name} deleted successfully`);
+        notifySuccess('Trip  deleted successfully');
       })
       .addMatcher(isAnyOf(...getActions('pending')), state => {
         state.isLoading = true;

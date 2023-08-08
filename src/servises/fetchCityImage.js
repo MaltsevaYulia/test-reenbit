@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const AccessKey = '4ZHunIuaK6r6ZZLT4aiTW4c6rG3BHlnbQ8leEi7_6DQ';
-const Secretkey = 'ZVrUPGd4lMJL6MKAo4YY0QBSc6--weA3oxURnqyJOSw';
+// const Secretkey = 'ZVrUPGd4lMJL6MKAo4YY0QBSc6--weA3oxURnqyJOSw';
 
 
 export const fetchCityImage = async cityName => {
