@@ -1,12 +1,17 @@
 .wrapper {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
-.img{
-   border-radius: 50px;
+.img {
+  border-radius: 50px;
 }
 
 .name {
-
+  color: #000;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 28px;
 }
