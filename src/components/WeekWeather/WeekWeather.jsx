@@ -4,7 +4,7 @@ import WeatherItem from './WeatherItem/WeatherItem';
 import css from './WeekWeather.module.css';
 
 const WeekWeather = ({ data }) => {
-  console.log('🚀 ~ WeekWeather ~ data:', data);
+  
   return (
     <div className={css.container}>
       <h3 className={css.title}>Week</h3>

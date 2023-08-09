@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://MaltsevaYulia.github.io/test-reenbit/",
   "dependencies": {
+    "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -12,6 +13,7 @@
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "formik": "^2.4.3",
+    "jwt-decode": "^3.1.2",
     "lodash.debounce": "^4.0.8",
     "nanoid": "^4.0.2",
     "react": "^18.1.0",

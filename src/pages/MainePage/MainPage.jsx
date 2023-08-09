@@ -12,7 +12,6 @@ import TripList from 'components/TripList/TripList';
 import WeekWeather from 'components/WeekWeather/WeekWeather';
 import { daysOfWeek } from 'constants/dayOfWeek';
 
-
 import { fetchFromToWeather, fetchTodayWeather } from 'servises/weatherAPI';
 import css from './MainPage.module.css';
 
@@ -23,7 +22,6 @@ const MainPage = () => {
   const [city, setCity] = useState('');
   const [temp, setTemp] = useState('');
   const [start, setStart] = useState('');
-  const [end, setEnd] = useState('');
   const [icon, setIcon] = useState('');
 
   const [weather, setWeather] = useState([]);
@@ -44,12 +42,11 @@ const MainPage = () => {
     const dayOfWeek = daysOfWeek[date.getDay()];
     const temp = days[0].temp;
     const icon = days[0].icon;
-   
+
     setDayOfWeek(dayOfWeek);
     setCity(city);
     setTemp(temp);
     setStart(start);
-    setEnd(end);
     setIsTripSelected(true);
     setIcon(icon);
 
@@ -59,37 +56,35 @@ const MainPage = () => {
   };
 
   return (
-    <main className={css.main}>
-      <div className={css.container}>
-        <h1 className={css.title}>
-          Weather <span className={css.titlespan}>Forecast</span>
-        </h1>
-        <Search />
-        <div className={css.wrapper}>
-          <ScrollContainer>
-            <TripList searhWeather={searhWeather} />
-            
-          </ScrollContainer>
-          <AddTripFormBtn togleModalOpen={setIsModalOpen} />
+    <>
+      <main className={css.main}>
+        <div className={css.container}>
+          <Search />
+          <div className={css.wrapper}>
+            <ScrollContainer>
+              <TripList searhWeather={searhWeather} />
+            </ScrollContainer>
+            <AddTripFormBtn togleModalOpen={setIsModalOpen} />
+          </div>
+          {isTripSelected && <WeekWeather data={weather} />}
         </div>
-        {isTripSelected && <WeekWeather data={weather} />}
-      </div>
-      {isTripSelected && (
-        <TodayWeather
-          dayOfWeek={dayOfWeek}
-          city={city}
-          temp={temp}
-          start={start}
-          icon={icon}
-        />
-      )}
+        {isTripSelected && (
+          <TodayWeather
+            dayOfWeek={dayOfWeek}
+            city={city}
+            temp={temp}
+            start={start}
+            icon={icon}
+          />
+        )}
 
-      {isModalOpen && (
-        <Modal modalOpen={setIsModalOpen}>
-          <AddTripForm togleModalOpen={setIsModalOpen} />
-        </Modal>
-      )}
-    </main>
+        {isModalOpen && (
+          <Modal modalOpen={setIsModalOpen}>
+            <AddTripForm togleModalOpen={setIsModalOpen} />
+          </Modal>
+        )}
+      </main>
+    </>
   );
 };
 

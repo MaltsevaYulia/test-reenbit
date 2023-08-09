@@ -1,113 +1,73 @@
-# React homework template
+# Weather Forecast App
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+![App Screenshot](screenshot.png)
 
-## Создание репозитория по шаблону
+This is a Weather Forecast application built using React. It allows users to search for weather forecasts based on selected trips.
 
-Используй этот репозиторий организации GoIT как шаблон для создания репозитория
-своего проекта. Для этого нажми на кнопку `«Use this template»` и выбери опцию
-`«Create a new repository»`, как показано на изображении.
+## Table of Contents
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
 
-На следующем шаге откроется страница создания нового репозитория. Заполни поле
-его имени, убедись что репозиторий публичный, после чего нажми кнопку
-`«Create repository from template»`.
+## Getting Started
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+### Prerequisites
 
-После того как репозиторий будет создан, необходимо перейти в настройки
-созданного репозитория на вкладку `Settings` > `Actions` > `General` как
-показано на изображении.
+Before running the application, you need to have the following software installed:
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+- Node.js: [Download](https://nodejs.org/)
 
-Проскролив страницу до самого конца, в секции `«Workflow permissions»` выбери
-опцию `«Read and write permissions»` и поставь галочку в чекбоксе. Это
-необходимо для автоматизации процесса деплоя проекта.
+### Installation
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+1. Clone the repository:
 
-Теперь у тебя есть личный репозиторий проекта, со структурой файлов и папок
-репозитория-шаблона. Далее работай с ним как с любым другим личным репозиторием,
-клонируй его себе на компьютер, пиши код, делай коммиты и отправляй их на
-GitHub.
+   ```bash
+   git clone https://github.com/your-username/weather-forecast-app.git
+   cd weather-forecast-app
 
-## Подготовка к работе
+2. Install the dependencies:
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Установи базовые зависимости проекта командой `npm install`.
-3. Запусти режим разработки, выполнив команду `npm start`.
-4. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+npm install
 
-## Деплой
 
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
+3. Set up environment variables:
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
-```
+Create a .env file in the root directory and add the following:
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+REACT_APP_GOOGLE_OAUTH_CLIENT_ID=
 
-![GitHub Pages settings](./assets/repo-settings.png)
+Replace clientId="<your_client_id>".com with your actual Google OAuth client ID.
 
-### Статус деплоя
+### Usage
+Run the development server:
 
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
 
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
+npm start
+Open your browser and navigate to http://localhost:3000 to view the app.
 
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
+### Features
 
-![Deployment status](./assets/deploy-status.png)
+Authenticate with Google using OAuth.
+Search for weather forecasts based on selected trips.
+Display today's weather details and a weekly weather forecast.
+Add new trips and view existing trips.
 
-### Живая страница
 
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
+### Contributing
 
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-### Маршрутизация
+Fork the repository.
+Create a new branch for your feature or bug fix: git checkout -b feature-name.
+Make your changes and commit them: git commit -m "Add some feature".
+Push to your fork: git push origin feature-name.
+Create a pull request.
+Please make sure to follow the code of conduct and contribution guidelines when submitting contributions.
 
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеш в начале строки обязателен.
-
-```jsx
-<BrowserRouter basename="/your_repo_name">
-  <App />
-</BrowserRouter>
-```
-
-## Как это работает
-
-![How it works](./assets/how-it-works.png)
-
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+### License
+This project is licensed under the MIT License.

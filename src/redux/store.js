@@ -1,16 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import {  contactsSliceBuilder } from './contactsSlice';
+import { authSlice } from './authSlice';
+
+
 import { filterSlice } from './filterSlice';
 import { tripsSlice } from './tripsSlice';
 
 export const store = configureStore({
   reducer: {
-    // contacts: contactsSlice.reducer,
-    // contacts: contactsSliceBuilder.reducer,
-    trips: tripsSlice.reducer,
+    auth: authSlice.reducer,
     filter: filterSlice.reducer,
+    trips: tripsSlice.reducer,
   },
 });
-
-
-

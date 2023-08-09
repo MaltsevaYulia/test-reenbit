@@ -5,6 +5,17 @@
   align-items: center;
   width: 150px;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item:hover,
+.item:focus {
+  box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.12), 2px 8px 8px rgba(0, 0, 0, 0.06),
+    4px 8px 10px rgba(0, 0, 0, 0.16);
+
+  transform: scale(1.02);
 }
 
 .cardInfo {

@@ -1,6 +1,5 @@
 import { formatDate } from 'helpers/formatDate';
 import React from 'react';
-// import { fetchFromToWeather, fetchTodayWeather } from 'servises/weatherAPI';
 import css from './TripItem.module.css';
 
 const TripItem = ({ data, searhWeather }) => {
@@ -18,9 +17,6 @@ const TripItem = ({ data, searhWeather }) => {
         src={url}
         width="150"
         height="150"
-        // className={css.image}
-        // src={imageError ? 'https://http.cat/407' : file}
-        // onError={handleImageError}
       />
       <div className={css.cardInfo}>
         <p className={css.city}>{city}</p>

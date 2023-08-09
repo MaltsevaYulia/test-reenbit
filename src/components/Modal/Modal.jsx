@@ -1,11 +1,9 @@
 import css from './Modal.module.css';
-// import { useNavigate } from 'react-router-dom';
 
 import { useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Modal = ({ modalOpen, children }) => {
-  //   const navigate = useNavigate();
 
   useEffect(() => {
     const handleEscape = ({ code }) => {

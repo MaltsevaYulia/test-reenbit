@@ -2,7 +2,9 @@ import React from 'react';
 import css from '../WeekWeather.module.css';
 
 const WeatherItem = ({ day, tempmax, tempmin, icon }) => {
+
   const iconPath = require(`../../../assets/wether-icons/${icon}.webp`);
+  
   return (
     <li className={css.item}>
       <p className={css.day}>{day}</p>

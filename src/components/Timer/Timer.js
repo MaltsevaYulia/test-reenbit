@@ -11,15 +11,13 @@ const initialTimerState = {
 
 const Timer = ({start}) => {
   const [timerState, setTimerState] = useState(initialTimerState);
-    // const { days, hours, minutes, seconds } = timerState;
+
     
   const timerId = setInterval(() => {
       const currentTime = Date.now();
       
       const dateObject = new Date(start);
       const selectedTime = dateObject.getTime();
-
-    // const selectedTime = new Date(milliseconds);
   
     const ms = selectedTime - currentTime;
     const { days, hours, minutes, seconds } = convertMs(ms);
