@@ -1,8 +1,8 @@
 {
-  "name": "test-reenbit",
+  "name": "weatherforecast",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://MaltsevaYulia.github.io/test-reenbit/",
+  "homepage": "https://MaltsevaYulia.github.io/weatherForecast/",
   "dependencies": {
     "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.5",
